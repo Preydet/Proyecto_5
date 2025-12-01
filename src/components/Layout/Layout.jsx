@@ -10,6 +10,7 @@ const Layout = ({ children }) => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        width: '100%',
     }}>
         {/* Header siempre visible */}
       
@@ -17,7 +18,12 @@ const Layout = ({ children }) => {
 
         {/* Contenido protegido por ErrorBoundary */}
         <ErrorBoundary>
-            <Box sx={{ flex: 1, padding: 2 }}>
+            <Box sx={{ 
+                flex: 1,
+                display: 'flex',
+                width: '100%',
+                padding: 2,
+                }}>
                 {children}
             </Box>
         </ErrorBoundary>

@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Chip, LinearProgress, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Chip, Grid, LinearProgress, Typography } from "@mui/material";
 import Layout from "../components/Layout/Layout";
 import { useParams } from "react-router-dom";
 import useFetch from "../components/useFetch";
@@ -23,10 +23,21 @@ const PokemonDetail = () => {
 
     return (
         <Layout>
-            <Box sx={{ maxWidth: 600, margin: "0 auto"}}>
+            <Box sx={{ 
+                    width: "100vw",
+                    minHeight: "calc(100vh - 160px)",
+                    display: "flex", 
+                    justifyContent: "center",
+                    alignContent: "center", 
+                    padding: 2,
+                }}>
                 {/*Tarjeta Principal*/}
-                <Card sx={{ padding: 2, textAlign: "center" }}>
+                <Card sx={{ width: "100%", maxWidth: 900, padding: 3 }}>
 
+                    {/*Grid para imagen y datos*/}
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={4} sx={{ textAlign: "center" }}>
+                    
                     {/* Imagen*/}
                     <CardMedia
                         component="img"
@@ -36,15 +47,21 @@ const PokemonDetail = () => {
                     />
 
                     {/* Nombre */}
-                    <Typography variant="h3" sx={{ textTransform: "capitalize" }}>
+                    <Typography variant="h3" sx={{ textTransform: "capitalize", marginTop: 2 }}>
                         {data.name}
                     </Typography>
+
+                    </Grid>
+
+                    {/*Información general*/}
+
+                    <Grid item xs={12} md={8}>
 
                     <CardContent>
 
                         {/*Tipos*/}
                         <Typography variant="h6">Tipos:</Typography>
-                        <Box sx={{ display: "flex", justifyContent: "center", gap: 1, marginBottom: 2 }}>
+                        <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>
                             {data.types.map((t) => (
                                 <Chip
                                     key={t.type.name}
@@ -60,7 +77,7 @@ const PokemonDetail = () => {
                         <Typography variant="body1"><strong>Peso:</strong> {data.weight / 10} kg</Typography>
 
                         {/*Habilidades*/}
-                        <Typography variant="h6" sx={{ mt: 3 }}>Habilidades:</Typography>
+                        <Typography variant="h6" sx={{ mb: 1 }}>Habilidades:</Typography>
                         <Box>
                             {data.abilities.map((a) => (
                                 <Typography
@@ -73,9 +90,9 @@ const PokemonDetail = () => {
                         </Box>
 
                         {/*Estadísticas*/}
-                        <Typography variant="h5" sx={{ mt: 4 }}>Estadísticas:</Typography>
+                        <Typography variant="h6" sx={{ mb: 1 }}>Estadísticas:</Typography>
                         {data.stats.map((stat) => (
-                            <Box Key={stat.stat.name} sx={{ my: 1 }}>
+                            <Box key={stat.stat.name} sx={{ mb: 1 }}>
                                 <Typography sx={{ textTransform: "capitalize" }}>
                                     {stat.stat.name}: {stat.base_stat}
                                 </Typography>
@@ -87,6 +104,8 @@ const PokemonDetail = () => {
                             </Box>
                         ))}
                     </CardContent>
+                    </Grid>
+                    </Grid>
                 </Card>                                                  
             </Box>
         </Layout>

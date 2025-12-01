@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import useFetch from "../components/useFetch";
 import Layout from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
@@ -31,19 +31,29 @@ const Pokemon = () => {
 
     return (
         <Layout>
+            <Box sx={{
+                padding: 2,
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+            }}>
+                {/*Título centrado*/}
                     
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', marginBottom: 3 }}>
                 Tarjetas de Pokémon
             </Typography>
 
-            <Grid container spacing={2}>
+            {/* Grid de tarjetas centradas */}
+
+            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 2}}>
                 {data.results.map((pokemon) => {
                     const pokemonId = getPokemonId(pokemon.url);
                     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
                     
                     return (
-                        <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
-                            <Card sx={{ textAlign: "center", padding: 1 }}>
+                        <Box key={pokemon.name} sx={{ flex: '0 0 16.66%', maxWidth: '16.66%', display: 'flex', justifyContent: 'center' }}>
+                            <Card sx={{ textAlign: "center", width: "100%", padding: 1, height: 200, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                                 <CardActionArea component={Link} to={`/pokemon/${pokemonId}`}>
                
                                     {/*Imagen del pokemon*/}
@@ -67,12 +77,13 @@ const Pokemon = () => {
                                 </CardActionArea>
                 
                              </Card>
-                        </Grid>
+                        </Box>
                     );
             
             })}
 
-            </Grid>                     
+            </Box>
+            </Box>                    
         </Layout>
     )
 }
