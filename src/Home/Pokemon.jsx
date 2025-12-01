@@ -3,6 +3,7 @@ import useFetch from "../components/useFetch";
 import Layout from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
 
+
 const Pokemon = () => {
     const url = "https://pokeapi.co/api/v2/pokemon?limit=150";
 
@@ -24,13 +25,13 @@ const Pokemon = () => {
     if (error) 
         return (
             <Layout>
-            <p>Error en la carga de pokemon: {error.message}</p>
+            <p>Error en la carga de Pokémon: {error.message}</p>
             </Layout>
         )
 
     return (
         <Layout>
-        
+                    
             <Typography variant="h4" gutterBottom>
                 Tarjetas de Pokémon
             </Typography>
