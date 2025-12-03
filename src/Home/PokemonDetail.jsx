@@ -28,15 +28,31 @@ const PokemonDetail = () => {
                     minHeight: "calc(100vh - 160px)",
                     display: "flex", 
                     justifyContent: "center",
-                    alignContent: "center", 
+                    alignItems: "center",
                     padding: 2,
                 }}>
                 {/*Tarjeta Principal*/}
-                <Card sx={{ width: "100%", maxWidth: 900, padding: 3 }}>
+                <Card sx={{ 
+                    width: "100%", 
+                    maxWidth: 900, 
+                    padding: 3,
+                    display: "flex", 
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                                        
+                    }}>
 
                     {/*Grid para imagen y datos*/}
                     <Grid container spacing={3}>
-                        <Grid item xs={12} md={4} sx={{ textAlign: "center" }}>
+                        <Grid item xs={12} md={4} 
+                        sx={{ 
+                        display: "flex", 
+                        flexDirection: "column", 
+                        justifyContent: "center",
+                        alignItems: "center",
+                        textAlign: "center"
+                        }}>
                     
                     {/* Imagen*/}
                     <CardMedia
@@ -55,8 +71,15 @@ const PokemonDetail = () => {
 
                     {/*Información general*/}
 
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={8}
+                      sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                    }}
 
+                    >
+                                         
                     <CardContent>
 
                         {/*Tipos*/}
