@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ErrorBoundary from "../ErrorBoundary";
 
-const Layout = ({ children, onFilter }) => {
+const Layout = ({ children, filter, onFilterChange, type, onTypeChange }) => {
   return (
     <Box sx={{
         display: 'flex',
@@ -15,7 +15,12 @@ const Layout = ({ children, onFilter }) => {
     }}>
         {/* Header siempre visible */}
       
-        <Header onFilter={onFilter} />
+        <Header 
+            filter={filter} 
+            onFilterChange={onFilterChange} 
+            type={type} 
+            onTypeChange={onTypeChange}
+        />
 
         {/* Contenido protegido por ErrorBoundary */}
         <ErrorBoundary>

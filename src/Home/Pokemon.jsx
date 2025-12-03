@@ -2,7 +2,8 @@ import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } f
 import useFetch from "../components/useFetch";
 import Layout from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 
 
@@ -12,37 +13,82 @@ const Pokemon = () => {
     //Estado para filtrar los pokémon
     const [filter, setFilter] = useState("");
 
+    //Estado para filtrar por tipo
+    const [type, setType] = useState("");
+
     //Estado para la paginación
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 21;
 
+     //Estado para guardar pokémon filtrados por tipo
+    const [typeFilteredList, setTypeFilteredList] = useState([]);
+    
     //Hook personalizado para obtener datos de la API
     const { data, loading, error } = useFetch(url);
 
+   
+    
     //Función para extraer el ID del Pokémon desde URL
 
     const getPokemonId = (url) => url.split('/').filter(Boolean).pop();
+
+    //Obetener lsita por tipo si se selecciona un tipo
+    useEffect(() => {
+        if (!type) {
+            setTypeFilteredList([]);
+            return;
+        }
+
+        const fetchTypeData = async () => {
+            try {
+            const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+            const json = await res.json();
+            const pokemonNNames = json.pokemon.map((p) => p.pokemon.name);
+            setTypeFilteredList(pokemonNNames);
+            } catch (error) {
+                console.error("Error fetching type data:", error);
+                setTypeFilteredList([]);
+            }
+        };
+
+        fetchTypeData();
+    }, [type]);
+    //Handle que actualiza filtros y reinicia la paginacion
+    const handleFilterChange = (value) => {
+        setFilter(value);
+        setCurrentPage(1);
+    };
+
+    const handleTypeChange = (value) => {
+        setType(value);
+        setCurrentPage(1);
+    };
+
 
     //Mostrar mensaje de carga mientras llega la APi
 
     if (loading)
          return (
-            <Layout onFilter={setFilter}>
+            <Layout>
                 <p>Cargando Pokémon...</p>
             </Layout>
         )
     // Mostrar mensaje de error si falla la API
     if (error) 
         return (
-            <Layout onFilter={setFilter}>
+            <Layout>
             <p>Error en la carga de Pokémon: {error.message}</p>
             </Layout>
         )
 
     // Filtrar los pokémon según el texto del filtro
-    const filteredData = data.results.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    const filteredData = (data?.results || [])
+            .filter((pokemon) => 
+                pokemon.name.toLowerCase().includes(filter.toLowerCase())
+            )
+            .filter((pokemon) => 
+                typeFilteredList.length === 0 || typeFilteredList.some(name => name.toLowerCase() === pokemon.name.toLowerCase())
+            );
 
     //Paginación
     const indexOfLast = currentPage * itemsPerPage;
@@ -52,16 +98,14 @@ const Pokemon = () => {
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
     return (
-        <Layout onFilter={setFilter}>
-                                            
-            <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', marginBottom: 3 }}>
-
-                {/*Tarjetas de Pokémon*/}
-
-            </Typography>
-
-            {/* Grid de tarjetas centradas */}
-
+        
+            <Layout                
+                filter={filter}
+                onFilterChange={handleFilterChange}
+                type={type}
+                onTypeChange={handleTypeChange}                
+            >                                                             
+               
             <Grid container spacing={3} justifyContent={"center"} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
                 {currentPokemons.map((pokemon) => {
                     const pokemonId = getPokemonId(pokemon.url);
@@ -142,6 +186,7 @@ const Pokemon = () => {
         </Box>
                                
         </Layout>
+    
     )
 }
 

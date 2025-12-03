@@ -1,24 +1,32 @@
-import { Box, TextField, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { Link } from "react-router-dom";
 import pokeball from '../../assets/img/pokeball.png';
+import Filters from "../../Home/Filters";
 
-const Header = ({onFilter}) => {
+const Header = ({filter, onFilterChange, type, onTypeChange}) => {
       return (
         <Box sx={{
             width: '100vw',
-            maxWidth: '100%',
-            height: 80,
             backgroundColor: '#1976d2',
-            display: 'flex',
-            flexDirection: {xs: 'column', sm: 'row'},
-            alignItems: 'center',
-            justifyContent: 'center',
             color: "#fff",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             padding: 2,
             gap: 1,
-            position: 'relative',
         }}
         >
+        {/* Fila superior: icono + titulo */}
+        <Box sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            }}
+        >
+
+    
         {/* Favicon a la izquierda y clickeable*/}
 
         <Link to="/" style={{ 
@@ -51,30 +59,22 @@ const Header = ({onFilter}) => {
             >
                 Pokédex React
             </Typography>
-            <Box
-                component="form"
-                sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-                noValidate
-                autoComplete="off"
-                >
-                <TextField
-                    id="filled-basic"
-                    label="Filled"
-                    variant="filled"
-                    size="small"
-                    onChange={(e) => onFilter(e.target.value)}
-                    sx={{ 
-                        backgroundColor: '#fff',
-                        borderRadius: 1,
-                        mt: { xs: 1, sm: 0},
-                        width: { xs: '90%', sm: '25ch'},
-                        flexShrink: 0
-                    }}
+        </Box>    
+            <Box>
+                <Filters
+                    filter={filter}
+                    onFilterChange={onFilterChange}
+                    type={type}
+                    onTypeChange={onTypeChange}
+                    
                     />  
-                </Box>
+            </Box>
         </Box>
-
-  ) 
+      )
 }
+        
+
+  
+
 
 export default Header;
