@@ -4,17 +4,18 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ErrorBoundary from "../ErrorBoundary";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, onFilter }) => {
   return (
     <Box sx={{
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
         width: '100%',
+        boxSizing: 'border-box',
     }}>
         {/* Header siempre visible */}
       
-        <Header />
+        <Header onFilter={onFilter} />
 
         {/* Contenido protegido por ErrorBoundary */}
         <ErrorBoundary>
@@ -23,6 +24,10 @@ const Layout = ({ children }) => {
                 display: 'flex',
                 width: '100%',
                 padding: 2,
+                flexDirection: 'column',
+                alignItems: 'center',
+                boxSizing: 'border-box',
+                overflowY: 'auto',
                 }}>
                 {children}
             </Box>
