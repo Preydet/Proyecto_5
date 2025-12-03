@@ -12,6 +12,10 @@ const Pokemon = () => {
     //Estado para filtrar los pokémon
     const [filter, setFilter] = useState("");
 
+    //Estado para la paginación
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 21;
+
     //Hook personalizado para obtener datos de la API
     const { data, loading, error } = useFetch(url);
 
@@ -40,6 +44,13 @@ const Pokemon = () => {
         pokemon.name.toLowerCase().includes(filter.toLowerCase())
     );
 
+    //Paginación
+    const indexOfLast = currentPage * itemsPerPage;
+    const indexOfFirst = indexOfLast - itemsPerPage;
+    const currentPokemons = filteredData.slice(indexOfFirst, indexOfLast);
+
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
     return (
         <Layout onFilter={setFilter}>
                                             
@@ -52,7 +63,7 @@ const Pokemon = () => {
             {/* Grid de tarjetas centradas */}
 
             <Grid container spacing={3} justifyContent={"center"} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
-                {filteredData.map((pokemon) => {
+                {currentPokemons.map((pokemon) => {
                     const pokemonId = getPokemonId(pokemon.url);
                     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
                     
@@ -112,7 +123,23 @@ const Pokemon = () => {
             
             })}
             </Grid>
-            
+        {/* Botones de Paginación */}
+
+        <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4, gap: 2, mt: 3 }}>
+            <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+            >
+                Anterior
+            </button>
+            <span>Página {currentPage} de {totalPages}</span>
+            <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+            >
+                Siguiente
+            </button>
+        </Box>
                                
         </Layout>
     )
