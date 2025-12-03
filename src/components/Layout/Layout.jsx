@@ -21,11 +21,8 @@ const Layout = ({ children, onFilter }) => {
         <ErrorBoundary>
             <Box sx={{ 
                 flex: 1,
-                display: 'flex',
                 width: '100%',
                 padding: 2,
-                flexDirection: 'column',
-                alignItems: 'center',
                 boxSizing: 'border-box',
                 overflowY: 'auto',
                 }}>

@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import useFetch from "../components/useFetch";
 import Layout from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
@@ -51,28 +51,28 @@ const Pokemon = () => {
 
             {/* Grid de tarjetas centradas */}
 
-            <Box sx={{ 
-                display: "flex",
-                flexWrap: "wrap", 
-                justifyContent: "center", 
-                gap: 2,
-                width: '100%',
-                maxWidth: 1200,
-                margin: '0 auto',
-                }}>
+            <Grid container spacing={3} justifyContent={"center"} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
                 {filteredData.map((pokemon) => {
                     const pokemonId = getPokemonId(pokemon.url);
                     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
                     
                     return (
-                        <Box key={pokemon.name} sx={{ 
-                            flex: '1 1 150px',
-                            maxWidth: '180px',
-                            display: 'flex', 
-                            justifyContent: 'center'
-
-                            }}>
-                            <Card sx={{ textAlign: "center", width: "100%", padding: 1, height: 200, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                        //Cada item ocupa 2 columnas de 12 en pantalla md, 6 por fila
+                        <Grid item xs={6} sm={4} md={2} lg={2} xl={2} key={pokemon.name} sx={{ display: "flex", justifyContent: "center" }}>                        
+                            
+                            <Card sx={{ 
+                                textAlign: "center", 
+                                width: "100%",
+                                maxWidth: 180,
+                                padding: 1, 
+                                height: 220, 
+                                display: "flex", 
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                flexGrow: 0,
+                               
+                                }}>
                                 <CardActionArea component={Link} to={`/pokemon/${pokemonId}`}>
                
                                     {/*Imagen del pokemon*/}
@@ -81,11 +81,22 @@ const Pokemon = () => {
                                         component="img"
                                         image={imageUrl}
                                         alt={pokemon.name}
-                                        sx={{ width: "120px", height: "120px", margin: "0 auto"}}
+                                        sx={{ 
+                                            maxWidth: "100%", 
+                                            height: "130px",
+                                            objectFit: "contain", 
+                                            margin: "0 auto"
+                                        }}
                                     />
 
                                     {/*Nombre del pokemon*/}
-                                    <CardContent>
+                                    <CardContent sx={{
+                                        flexGrow: 1,
+                                        display: "flex", 
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        padding: 1,
+                                    }}>
                                         <Typography
                                             variant="h6"
                                             sx={{ textTransform: "capitalize"}}
@@ -96,12 +107,12 @@ const Pokemon = () => {
                                 </CardActionArea>
                 
                              </Card>
-                        </Box>
+                        </Grid>
                     );
             
             })}
-
-            </Box>
+            </Grid>
+            
                                
         </Layout>
     )
