@@ -76,11 +76,13 @@ const PokemonDetail = () => {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
                     }}
 
                     >
                                          
-                    <CardContent>
+                    <CardContent sx={{ width: "100%" }}>
 
                         {/*Tipos*/}
                         <Typography variant="h6">Tipos:</Typography>

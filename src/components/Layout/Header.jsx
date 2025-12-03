@@ -1,5 +1,6 @@
 import { Box, TextField, Typography } from "@mui/material"
 import { Link } from "react-router-dom";
+import pokeball from '../../assets/img/pokeball.png';
 
 const Header = ({onFilter}) => {
       return (
@@ -15,17 +16,35 @@ const Header = ({onFilter}) => {
             color: "#fff",
             padding: 2,
             gap: 1,
+            position: 'relative',
         }}
         >
+        {/* Favicon a la izquierda y clickeable*/}
+
+        <Link to="/" style={{ 
+            position: 'absolute',
+            left: 16,
+        }}>
+        
+        <Box                   
+                component={'img'}
+                src={pokeball}
+                alt="Pokédex icon"
+                sx={{
+                    width: 40,
+                    height: 40,
+                }}
+            />
+        </Link>
+                    
+
             {/* Título */}
             <Typography 
                 variant="h6"
-                component={Link}
-                to="/"
-                sx={{ 
+                    sx={{ 
                     color: "white",
                     textDecoration: "none",
-                    cursor: "pointer",
+                    cursor: "default",
                     flexShrink: 0,
 
                  }}
