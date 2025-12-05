@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import pokeball from '../../assets/img/pokeball.png';
 import Filters from "../../Home/Filters";
 
-const Header = ({filter, onFilterChange, type, onTypeChange}) => {
+const Header = ({filter, onFilterChange}) => {
       return (
         <Box sx={{
             width: '100vw',
@@ -14,6 +14,7 @@ const Header = ({filter, onFilterChange, type, onTypeChange}) => {
             alignItems: 'center',
             padding: 2,
             gap: 1,
+            boxSizing: 'border-box',
         }}
         >
         {/* Fila superior: icono + titulo */}
@@ -39,8 +40,8 @@ const Header = ({filter, onFilterChange, type, onTypeChange}) => {
                 src={pokeball}
                 alt="Pokédex icon"
                 sx={{
-                    width: 40,
-                    height: 40,
+                    width: 60,
+                    height: 60,
                 }}
             />
         </Link>
@@ -63,9 +64,7 @@ const Header = ({filter, onFilterChange, type, onTypeChange}) => {
             <Box>
                 <Filters
                     filter={filter}
-                    onFilterChange={onFilterChange}
-                    type={type}
-                    onTypeChange={onTypeChange}
+                    onFilterChange={onFilterChange}                  
                     
                     />  
             </Box>
