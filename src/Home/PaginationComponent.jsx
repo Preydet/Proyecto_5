@@ -25,7 +25,7 @@ const PaginationComponent = ({currentPage, totalPages, onPageChange}) => {
                     color: '#0a0a0aff',                                      
                     },
                     '& .MuiPaginationItem-root:hover': {
-                    backgroundcolor: '#333',
+                    backgroundColor: '#333',
                     },                    
                     '& .MuiPaginationItem-previousNext': {
                     color: '#fff',

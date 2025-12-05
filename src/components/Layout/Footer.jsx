@@ -1,25 +1,41 @@
-import { Box, Typography } from "@mui/material"
-import { Link } from "react-router-dom";
+import { Box, Typography,Link, Stack } from "@mui/material"
+
 
 const Footer = () => {
     return (
-      <Box
-        component={Link}
-        to="/"
+      <Box        
         sx={{
-            textAlign: 'center',
-            padding: '1rem',
-            marginTop: '2rem',
-            backgroundColor: '#f1f1f1',
-            cursor: 'pointer',
-            textDecoration: 'none',
-            color: 'inherit',
-            display: 'block'
+            width: '100vw',
+            backgroundColor: '#1976d2',
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: 3,
+            gap: 1,
+            mt: 4,
+            boxSizing: 'border-box',
+
         }}
     >
-        <Typography variant="body2">
-            &copy {new Date().getFullYear()} Pokédex React.
+       {/* Información de contacto */}
+       <Typography variant="body1" sx={{ mb:1 }}>
+       {'\u00A9'} Pokédex React
+       </Typography>
+
+       <Typography variant="body2" sx={{ textAlign: "center" }}>
+        Dirección: Calle Ficticia 123, Ciudad pokémon      
+       </Typography>
+
+       <Typography variant="body2" sx={{ textAlign: "center"}}>
+        Telefóno: +56 9 124456789
+       </Typography>      
+
+       {/* Redes sociales ficticias*/}
+       <Typography variant="body2" sx={{ textAlign: "center", mt: 1 }}>
+        Síguemos en: Facebook | Twitter | Instagram
         </Typography>
+
     </Box>
   )
 }

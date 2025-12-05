@@ -15,6 +15,7 @@ const Header = ({filter, onFilterChange}) => {
             padding: 2,
             gap: 1,
             boxSizing: 'border-box',
+            position: 'relative',
         }}
         >
         {/* Fila superior: icono + titulo */}
@@ -24,15 +25,18 @@ const Header = ({filter, onFilterChange}) => {
             alignItems: 'center',
             justifyContent: 'center',
             position: 'relative',
+            height: 60,
             }}
         >
 
     
         {/* Favicon a la izquierda y clickeable*/}
 
-        <Link to="/" style={{ 
+        <Link to="/" style={{
             position: 'absolute',
-            left: 16,
+            left: '8rem',
+            top: '50%',
+            transform: 'translateY(-50%)'            
         }}>
         
         <Box                   
