@@ -32,7 +32,10 @@ const Header = ({filter, onFilterChange}) => {
     
         {/* Favicon a la izquierda y clickeable*/}
 
-        <Link to="/" style={{
+        <Link 
+            to="/"
+            onClick={() => onFilterChange("")}
+            style={{
             position: 'absolute',
             left: '8rem',
             top: '50%',
