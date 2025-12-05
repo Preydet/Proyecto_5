@@ -3,14 +3,12 @@ import { Box, TextField} from "@mui/material"
 const Filters = ({ filter, onFilterChange} ) => {
     return (
         <Box
-            sx={{
-                display: 'flex',
-                gap: 2,
-                justifyContent: 'center',
-                flexWrap: 'nowrap',
-                marginLeft: {sm: 2},
-            }}
-        >
+            component="form"
+                sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+                noValidate
+                autoComplete="off"
+                 > 
+                               
         {/* Filtro por nombre */}
         <TextField
             label="Buscar Pokémon"
@@ -21,6 +19,7 @@ const Filters = ({ filter, onFilterChange} ) => {
             sx={{ backgroundColor: '#fff', borderRadius: 1, minWidth: 200, width: {xs:'60vw', sm:250}, }} 
         />
     </Box>      
+    
     )
 }
 

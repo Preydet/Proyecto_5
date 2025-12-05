@@ -3,6 +3,7 @@ import useFetch from "../components/useFetch";
 import Layout from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { useState} from "react";
+import PaginationComponent from "../Home/PaginationComponent";
 
 const Pokemon = () => {
     const url = "https://pokeapi.co/api/v2/pokemon?limit=100";
@@ -129,21 +130,12 @@ const Pokemon = () => {
             </Grid>
         {/* Botones de Paginación */}
 
-        <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4, gap: 2, mt: 3 }}>
-            <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-            >
-                Anterior
-            </button>
-            <span>Página {currentPage} de {totalPages}</span>
-            <button
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-            >
-                Siguiente
-            </button>
-        </Box>
+        <PaginationComponent
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+        
+        />
                                
         </Layout>
     
