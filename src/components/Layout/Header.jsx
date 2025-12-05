@@ -25,7 +25,8 @@ const Header = ({filter, onFilterChange}) => {
             alignItems: 'center',
             justifyContent: 'center',
             position: 'relative',
-            height: 60,
+            height: { xs: 60, sm: 100},
+            px: {xs: 2, sm: 4 },
             }}
         >
 
@@ -37,7 +38,7 @@ const Header = ({filter, onFilterChange}) => {
             onClick={() => onFilterChange("")}
             style={{
             position: 'absolute',
-            left: '8rem',
+            left: 64,
             top: '50%',
             transform: 'translateY(-50%)'            
         }}>
@@ -47,8 +48,8 @@ const Header = ({filter, onFilterChange}) => {
                 src={pokeball}
                 alt="Pokédex icon"
                 sx={{
-                    width: 60,
-                    height: 60,
+                    width: { xs: 40, sm:60 },
+                    height: { xs: 40, sm: 60 },
                 }}
             />
         </Link>
@@ -59,9 +60,9 @@ const Header = ({filter, onFilterChange}) => {
                 variant="h6"
                     sx={{ 
                     color: "white",
-                    textDecoration: "none",
-                    cursor: "default",
-                    flexShrink: 0,
+                    textAlign: 'center',
+                    flexGrow: 1,
+                    fontSize: { xs: '1rem', sm: '1.5rem'},
 
                  }}
             >
